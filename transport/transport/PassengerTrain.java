@@ -18,6 +18,11 @@ public class PassengerTrain extends Train {
     }
 
     @Override
+    public void removeCargo(int i) {
+
+    }
+
+    @Override
     public String toString() {
         return "Passenger Train " + name;
     }

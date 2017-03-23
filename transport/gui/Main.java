@@ -4,36 +4,54 @@ import cargo.*;
 import transport.*;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+
+import static utils.Constants.READER;
+import static utils.MenuUtils.printMenu;
+import static utils.MenuUtils.toStringArray;
 
 /**
  * Created by istimaldar on 23.03.2017.
  */
 public class Main {
+    private static final int SECOND_MENU_ITEMS = 3;
     public static  void main(String [] args) {
         ArrayList<Driver> drivers = new ArrayList<>();
         ArrayList<String> routes = new ArrayList<>();
         ArrayList<Train> trains = new ArrayList<>();
         int exit = 0;
         while (exit == 0) {
-            switch (printFirstLevelMenu()) {
-                case 1:
+            int object = printMenu("Select an object:", new String [] {"Driver", "Route", "Train", "Exit"});
+            if (object > 3) {
+                break;
+            }
+            int action = printMenu("Select an action:", new String [] {"Add", "Show", "Select"});
+            switch (object  * SECOND_MENU_ITEMS + action) {
+                case 0:
                     drivers.add(addDriver());
                     break;
+                case 1:
+                    //TODO: Add the ability to display drivers
+                    break;
                 case 2:
-                    routes.add(addRoute());
+                    //TODO: Add the ability to select drivers
                     break;
                 case 3:
-                    trains.add(addTrain(drivers, routes));
+                    routes.add(addRoute());
                     break;
                 case 4:
-                    addCarriage(trains);
+                    //TODO: Add the ability to display routes
                     break;
                 case 5:
-                    addCargo(trains);
+                    //TODO: Add the ability to display routes
                     break;
                 case 6:
-                    showDrivers(drivers);
+                    trains.add(addTrain(drivers, routes));
+                    break;
+                case 7:
+                    //TODO: Add the ability to display routes
+                    break;
+                case 8:
+                    selectTrain(trains);
                     break;
                 default:
                     exit = 1;
@@ -42,69 +60,17 @@ public class Main {
         }
     }
 
-    private static int printFirstLevelMenu() {
-        System.out.println("Select an option:");
-        System.out.println("1. Add a driver.");
-        System.out.println("2. Add a route.");
-        System.out.println("3. Add a train.");
-        System.out.println("4. Add a carriage.");
-        System.out.println("5. Load carriage.");
-        System.out.println("6. Show drivers.");
-        System.out.println("7. Show routes.");
-        System.out.println("8. Show trains.");
-        Scanner reader = new Scanner(System.in);
-        return reader.nextInt();
-    }
-
     private static Driver addDriver() {
-        Scanner reader = new Scanner(System.in);  // Reading from System.in
         System.out.println("Enter first name: ");
-        String firstName = reader.next(); // Scans the next token of the input as an int.
+        String firstName = READER.next(); // Scans the next token of the input as an int.
         System.out.println("Enter last name: ");
-        String lastName = reader.next(); // Scans the next token of the input as an int.
+        String lastName = READER.next(); // Scans the next token of the input as an int.
         return new Driver(firstName, lastName);
     }
 
     private static String addRoute() {
-        Scanner reader = new Scanner(System.in);  // Reading from System.in
         System.out.println("Enter route name: ");
-        return reader.next();
-    }
-
-    private static Driver printDriverSelectMenu(ArrayList<Driver> drivers) {
-        System.out.println("Select a driver:");
-        for (int i = 0; i < drivers.size(); i++) {
-            System.out.println((i + 1) + ". " + drivers.get(i).toString());
-        }
-        Scanner reader = new Scanner(System.in);  // Reading from System.in
-        return drivers.get(reader.nextInt() - 1);
-    }
-
-    private static String printRouteSelectMenu(ArrayList<String> routes) {
-        System.out.println("Select a route:");
-        for (int i = 0; i < routes.size(); i++) {
-            System.out.println((i + 1) + ". " + routes.get(i));
-        }
-        Scanner reader = new Scanner(System.in);  // Reading from System.in
-        return routes.get(reader.nextInt() - 1);
-    }
-
-    private static Train addTrain(ArrayList<Driver> drivers, ArrayList<String> routes) {
-        System.out.println("Select train's type:");
-        System.out.println("1. Freight Train");
-        System.out.println("2. Passenger Train");
-        Scanner reader = new Scanner(System.in);  // Reading from System.in
-        int n = reader.nextInt();
-        System.out.println("Enter train's name:");
-        String name = reader.next();
-        switch (n) {
-            case 1:
-                return new FreightTrain(printDriverSelectMenu(drivers), printRouteSelectMenu(routes), name);
-            case 2:
-                return new PassengerTrain(printDriverSelectMenu(drivers), printRouteSelectMenu(routes), name);
-            default:
-                throw new IllegalArgumentException("No such train type");
-        }
+        return READER.next();
     }
 
     private static Train printTrainSelectMenu(ArrayList<Train> trains) {
@@ -112,18 +78,55 @@ public class Main {
         for (int i = 0; i < trains.size(); i++) {
             System.out.println((i + 1) + ". " + trains.get(i).toString());
         }
-        Scanner reader = new Scanner(System.in);  // Reading from System.in
-        return trains.get(reader.nextInt() - 1);
+        return trains.get(READER.nextInt() - 1);
     }
 
-    private static void addCarriage(ArrayList<Train> trains) {
-        Train train = printTrainSelectMenu(trains);
-        System.out.println("Select carriage type:");
-        System.out.println("1. Freight Carriage");
-        System.out.println("2. Compartment Carriage");
-        System.out.println("3. Compartment Carriage");
-        Scanner reader = new Scanner(System.in);  // Reading from System.in
-        switch (reader.nextInt()) {
+    private static Train addTrain(ArrayList<Driver> drivers, ArrayList<String> routes) {
+        int n = printMenu("Select train's type:", new String [] {"Freight Train", "Passenger Train"});
+        System.out.println("Enter train's name:");
+        String name = READER.next();
+        int driver = printMenu("Select the driver:", toStringArray(drivers));
+        int route = printMenu("Select the route:", toStringArray(routes));
+        switch (n) {
+            case 1:
+                return new FreightTrain(drivers.get(driver), routes.get(route), name);
+            case 2:
+                return new PassengerTrain(drivers.get(driver), routes.get(route), name);
+            default:
+                throw new IllegalArgumentException("No such train type");
+        }
+    }
+
+    private static void selectTrain(ArrayList<Train> trains) {
+        int trainIndex = printMenu("Select the driver:", toStringArray(trains));
+        Train train = trains.get(trainIndex);
+        int n = printMenu("Select the train:", new String [] {"Delete", "Add carriage", "Show info",
+                "Select carriage", "Back"});
+        switch (n) {
+            case 0:
+                trains.remove(trainIndex);
+                break;
+            case 1:
+                addCarriage(train);
+                break;
+            case 2:
+                //TODO: Full train info
+                break;
+            case 3:
+                selectCarriage(train);
+                break;
+            case 4:
+                //TODO: Back
+                break;
+            default:
+                throw new IllegalArgumentException("No such carriage action");
+        }
+    }
+
+    private static void addCarriage(Train train) {
+        int type = printMenu("Select an action:", new String [] {"Freight carriage", "Compartment carriage",
+                "Economy Class Carriage"});
+        switch (type) {
             case 1:
                 train.addCarriage(new FreightCarriage());
                 break;
@@ -138,72 +141,69 @@ public class Main {
         }
     }
 
-    private static Carriage printCarriageMenu(Train train) {
-        System.out.println("Select a carriage:");
+    private static void selectCarriage(Train train) {
+        int carriageIndex = printMenu("Select the driver:", toStringArray(train.getCarriages()));
+        Carriage carriage = train.getCarriages().get(carriageIndex);
+        int n = printMenu("Select the action:", new String [] {"Delete", "Add cargo", "Show info", "Back"});
+        switch (n) {
+            case 0:
+                train.removeCargo(carriageIndex);
+                break;
+            case 1:
+                addCargo(carriage);
+                break;
+            case 2:
+                //TODO: Full train info
+                break;
+            case 3:
 
-        for (int i = 0; i < train.getCarriagesSize(); i++) {
-            System.out.println((i + 1) + ". " + train.getCarriage(i).toString());
+                break;
+            case 4:
+                //TODO: Back
+                break;
+            default:
+                throw new IllegalArgumentException("No such carriage action");
         }
-        Scanner reader = new Scanner(System.in);  // Reading from System.in
-        return train.getCarriage(reader.nextInt());
     }
 
-    private static void addCargo(ArrayList<Train> trains) {
-        Train train = printTrainSelectMenu(trains);
-        Carriage carriage = printCarriageMenu(train);
-        System.out.println("Select cargo type:");
-        System.out.println("1. Baggage");
-        System.out.println("2. Cargo");
-        System.out.println("3. Passenger");
-        Scanner reader = new Scanner(System.in);
-        switch (reader.nextInt()) {
+    private static void addCargo(Carriage carriage) {
+        int n = printMenu("Select the type of cargo:", new String [] {"Baggage", "Cargo", "Passenger"});
+        switch (n) {
             case 1:
                 System.out.println("Enter the name of owner");
-                String owner = reader.next();
+                String owner = READER.next();
                 System.out.println("Enter the number of baggage");
-                carriage.load(new Baggage(owner, reader.nextFloat()));
+                carriage.load(new Baggage(owner, READER.nextFloat()));
                 break;
             case 2:
                 System.out.println("Enter the type of cargo");
-                String type = reader.next();
+                String type = READER.next();
                 System.out.println("Enter the number of cargo");
-                carriage.load(new Cargo(type, reader.nextFloat()));
+                carriage.load(new Cargo(type, READER.nextFloat()));
                 break;
             case 3:
                 System.out.println("Enter the first name of passenger");
-                String firstName = reader.next();
+                String firstName = READER.next();
                 System.out.println("Enter the last name of passenger");
-                carriage.load(new Passenger(firstName, reader.next()));
+                carriage.load(new Passenger(firstName, READER.next()));
                 break;
             default:
                 throw new IllegalArgumentException("No such carriage type");
         }
     }
 
-    private static void showDrivers(ArrayList<Driver> drivers) {
-        System.out.println("Drivers list:");
-        for (int i = 0; i < drivers.size(); i++) {
-            System.out.println((i + 1) + ". " + drivers.get(i).toString());
-        }
-    }
-
-    public static void clearConsole()
-    {
-        try
-        {
+    private static void clearConsole() {
+        try {
             final String os = System.getProperty("os.name");
 
-            if (os.contains("Windows"))
-            {
+            if (os.contains("Windows")) {
                 Runtime.getRuntime().exec("cls");
             }
-            else
-            {
+            else {
                 Runtime.getRuntime().exec("clear");
             }
         }
-        catch (final Exception e)
-        {
+        catch (final Exception e) {
             //  Handle any exceptions.
         }
     }

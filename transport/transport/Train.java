@@ -26,13 +26,11 @@ abstract public class Train extends Transport {
         }
     }
 
-    public Carriage getCarriage(int num) {
-        return carriages.get(num);
+    public ArrayList<Carriage> getCarriages() {
+        return carriages;
     }
 
-    public int getCarriagesSize() {
-        return carriages.size();
-    }
+    abstract public void removeCargo(int i);
 
     abstract public String toString();
 
