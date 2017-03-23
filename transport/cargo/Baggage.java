@@ -5,10 +5,10 @@ package cargo;
  * Created by istimaldar on 23.03.2017.
  */
 public class Baggage implements Loadable {
-    private Passenger owner;
+    private String owner;
     private float amount;
 
-    public Baggage(Passenger owner, float amount) {
+    public Baggage(String owner, float amount) {
         this.owner = owner;
         if (amount < 0) {
             throw new IllegalArgumentException("Cargo weight can not be less than 0");
@@ -21,7 +21,7 @@ public class Baggage implements Loadable {
         if (amount == 0) {
             return "NO BAGGAGE";
         }
-        return owner.getName() + "'s baggage, " + amount + "g." ;
+        return owner + "'s baggage, " + amount + "g." ;
     }
 
     @Override

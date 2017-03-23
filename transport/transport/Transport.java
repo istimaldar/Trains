@@ -6,9 +6,11 @@ package transport;
 abstract public class Transport {
     private Driver driver;
     String routeName;
-    Transport(Driver driver, String route) {
+    String name;
+    Transport(Driver driver, String route, String name) {
         this.driver = driver;
         routeName = route;
+        this.name = name;
     }
     public Driver getDriver() {
         return driver;
@@ -18,6 +20,6 @@ abstract public class Transport {
         printDriver();
     }
     protected void printDriver() {
-        System.out.println("Driver is " + driver.toStrng());
+        System.out.println("Driver is " + driver.toString());
     }
 }

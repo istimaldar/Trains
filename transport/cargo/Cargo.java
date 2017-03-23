@@ -7,7 +7,7 @@ public class Cargo implements Loadable {
     private String type;
     private float amount;
 
-    public Cargo(float amount, String type) {
+    public Cargo(String type, float amount) {
         this.amount = amount;
         if (amount == 0) {
             this.type = "Air";

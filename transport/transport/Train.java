@@ -3,15 +3,15 @@ package transport;
 import cargo.Carriage;
 
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by istimaldar on 20.03.2017.
  */
 abstract public class Train extends Transport {
-    List<Carriage> carriages;
-    Train(Driver driver, String route) {
-        super(driver, route);
+    ArrayList<Carriage> carriages;
+    Train(Driver driver, String route, String name) {
+        super(driver, route, name);
     }
 
     @Override
@@ -25,6 +25,16 @@ abstract public class Train extends Transport {
             carriages.add(carriage);
         }
     }
+
+    public Carriage getCarriage(int num) {
+        return carriages.get(num);
+    }
+
+    public int getCarriagesSize() {
+        return carriages.size();
+    }
+
+    abstract public String toString();
 
     abstract boolean canBeAdded(Carriage carriage);
 }

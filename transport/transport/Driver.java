@@ -9,7 +9,7 @@ public class Driver {
         this.lastName = lastName;
     }
 
-    public String toStrng() {
+    public String toString() {
         return firstName + " " + lastName;
     }
 }
