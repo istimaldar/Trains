@@ -5,12 +5,13 @@ import com.istimaldar.cargo.Carriage;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by istimaldar on 20.03.2017.
  */
 abstract public class Train extends Transport implements Serializable {
-    ArrayList<Carriage> carriages;
+    List<Carriage> carriages;
     Train(Driver driver, String route, String name) {
         super(driver, route, name);
     }
@@ -27,7 +28,7 @@ abstract public class Train extends Transport implements Serializable {
         }
     }
 
-    public ArrayList<Carriage> getCarriages() {
+    public List<Carriage> getCarriages() {
         return carriages;
     }
 

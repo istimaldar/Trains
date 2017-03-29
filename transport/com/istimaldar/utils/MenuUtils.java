@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -33,7 +34,7 @@ public class MenuUtils {
         return selected;
     }
 
-    private static <T> String[] toStringArray(ArrayList<T> list) {
+    private static <T> String[] toStringArray(List<T> list) {
         String [] result = new String[list.size()];
         for (int i = 0; i < result.length; i++) {
             result[i] = list.get(i).toString();
@@ -70,7 +71,7 @@ public class MenuUtils {
         return name;
     }
 
-    public static Train addTrain(ArrayList<Driver> drivers, ArrayList<String> routes) {
+    public static Train addTrain(List<Driver> drivers, List<String> routes) {
         Train train = null;
         int n = printMenu("Select train's type:", new String [] {"Freight Train", "Passenger Train"});
         Scanner reader = new Scanner(System.in);
@@ -94,7 +95,7 @@ public class MenuUtils {
         return train;
     }
 
-    public static void selectTrain(ArrayList<Train> trains) {
+    public static void selectTrain(List<Train> trains) {
         int trainIndex = printMenu("Select the driver:", toStringArray(trains));
         Train train = trains.get(trainIndex);
         int n = printMenu("Select the train:", new String [] {"Delete", "Add carriage", "Show info",
@@ -120,7 +121,7 @@ public class MenuUtils {
         }
     }
 
-    public static void addCarriage(Train train) {
+    private static void addCarriage(Train train) {
         int type = printMenu("Select an action:", new String [] {"Freight carriage", "Compartment carriage",
                 "Economy Class Carriage"});
         switch (type) {
@@ -138,7 +139,7 @@ public class MenuUtils {
         }
     }
 
-    public static void selectCarriage(Train train) {
+    private static void selectCarriage(Train train) {
         int carriageIndex = printMenu("Select the driver:", toStringArray(train.getCarriages()));
         Carriage carriage = train.getCarriages().get(carriageIndex);
         int n = printMenu("Select the action:", new String [] {"Delete", "Add cargo", "Show info", "Back"});
@@ -163,7 +164,7 @@ public class MenuUtils {
         }
     }
 
-    public static void addCargo(Carriage carriage) {
+    private static void addCargo(Carriage carriage) {
         int n = printMenu("Select the type of cargo:", new String [] {"Baggage", "Cargo", "Passenger"});
         Scanner reader = new Scanner(System.in);
         try {
