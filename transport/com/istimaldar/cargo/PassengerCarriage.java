@@ -1,9 +1,9 @@
-package cargo;
+package com.istimaldar.cargo;
 
 import java.util.ArrayList;
 
-import static utils.Constants.EMPTY_BAGGAGE;
-import static utils.Constants.EMPTY_SEAT;
+import static com.istimaldar.utils.Constants.EMPTY_BAGGAGE;
+import static com.istimaldar.utils.Constants.EMPTY_SEAT;
 
 /**
  * Created by istimaldar on 23.03.2017.

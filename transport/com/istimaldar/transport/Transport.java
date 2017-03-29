@@ -1,4 +1,4 @@
-package transport;
+package com.istimaldar.transport;
 
 /**
  * Created by istimaldar on 20.03.2017.

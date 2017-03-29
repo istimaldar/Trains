@@ -1,8 +1,8 @@
-package utils;
+package com.istimaldar.utils;
 
 import java.util.ArrayList;
 
-import static utils.Constants.READER;
+import static com.istimaldar.utils.Constants.READER;
 
 /**
  * Created by istimaldar on 23.03.2017.

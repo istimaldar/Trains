@@ -1,6 +1,8 @@
-package transport;
+package com.istimaldar.transport;
 
-public class Driver {
+import java.io.Serializable;
+
+public class Driver implements Serializable {
     private String firstName;
     private String lastName;
 

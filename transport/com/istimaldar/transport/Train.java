@@ -1,14 +1,15 @@
-package transport;
+package com.istimaldar.transport;
 
-import cargo.Carriage;
+import com.istimaldar.cargo.Carriage;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by istimaldar on 20.03.2017.
  */
-abstract public class Train extends Transport {
+abstract public class Train extends Transport implements Serializable {
     ArrayList<Carriage> carriages;
     Train(Driver driver, String route, String name) {
         super(driver, route, name);

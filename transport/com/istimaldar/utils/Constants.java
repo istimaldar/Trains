@@ -1,8 +1,8 @@
-package utils;
+package com.istimaldar.utils;
 
-import cargo.Baggage;
-import cargo.Loadable;
-import cargo.Passenger;
+import com.istimaldar.cargo.Baggage;
+import com.istimaldar.cargo.Loadable;
+import com.istimaldar.cargo.Passenger;
 
 import java.util.Scanner;
 

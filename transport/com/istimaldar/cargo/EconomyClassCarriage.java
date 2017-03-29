@@ -1,6 +1,4 @@
-package cargo;
-
-import java.util.ArrayList;
+package com.istimaldar.cargo;
 
 /**
  * Created by istimaldar on 23.03.2017.

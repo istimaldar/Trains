@@ -1,13 +1,17 @@
-package gui;
+package com.istimaldar.gui;
 
-import cargo.*;
-import transport.*;
+import com.istimaldar.cargo.*;
+import com.istimaldar.transport.Driver;
+import com.istimaldar.transport.FreightTrain;
+import com.istimaldar.transport.PassengerTrain;
+import com.istimaldar.transport.Train;
+import com.istimaldar.utils.ListUtils;
 
 import java.util.ArrayList;
 
-import static utils.Constants.READER;
-import static utils.MenuUtils.printMenu;
-import static utils.MenuUtils.toStringArray;
+import static com.istimaldar.utils.Constants.READER;
+import static com.istimaldar.utils.MenuUtils.printMenu;
+import static com.istimaldar.utils.MenuUtils.toStringArray;
 
 /**
  * Created by istimaldar on 23.03.2017.
@@ -19,6 +23,9 @@ public class Main {
         ArrayList<String> routes = new ArrayList<>();
         ArrayList<Train> trains = new ArrayList<>();
         int exit = 0;
+        drivers = (ArrayList<Driver>) ListUtils.deserialzeObject("drivers");
+        routes = (ArrayList<String>) ListUtils.deserialzeObject("drivers");
+        trains = (ArrayList<Train>) ListUtils.deserialzeObject("drivers");
         while (exit == 0) {
             int object = printMenu("Select an object:", new String [] {"Driver", "Route", "Train", "Exit"});
             if (object > 3) {
@@ -57,28 +64,23 @@ public class Main {
                     exit = 1;
             }
             clearConsole();
+            ListUtils.serializeObject(drivers, "drivers");
+            ListUtils.serializeObject(routes, "routes");
+            ListUtils.serializeObject(trains, "trains");
         }
     }
 
     private static Driver addDriver() {
         System.out.println("Enter first name: ");
-        String firstName = READER.next(); // Scans the next token of the input as an int.
+        String firstName = READER.next();
         System.out.println("Enter last name: ");
-        String lastName = READER.next(); // Scans the next token of the input as an int.
+        String lastName = READER.next();
         return new Driver(firstName, lastName);
     }
 
     private static String addRoute() {
         System.out.println("Enter route name: ");
         return READER.next();
-    }
-
-    private static Train printTrainSelectMenu(ArrayList<Train> trains) {
-        System.out.println("Select a train:");
-        for (int i = 0; i < trains.size(); i++) {
-            System.out.println((i + 1) + ". " + trains.get(i).toString());
-        }
-        return trains.get(READER.nextInt() - 1);
     }
 
     private static Train addTrain(ArrayList<Driver> drivers, ArrayList<String> routes) {

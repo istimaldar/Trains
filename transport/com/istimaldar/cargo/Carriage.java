@@ -1,4 +1,4 @@
-package cargo;
+package com.istimaldar.cargo;
 
 import java.util.ArrayList;
 

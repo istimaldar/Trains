@@ -1,7 +1,7 @@
-package transport;
+package com.istimaldar.transport;
 
-import cargo.Carriage;
-import cargo.FreightCarriage;
+import com.istimaldar.cargo.Carriage;
+import com.istimaldar.cargo.FreightCarriage;
 
 /**
  * Created by istimaldar on 23.03.2017.

@@ -1,4 +1,4 @@
-package cargo;
+package com.istimaldar.cargo;
 
 /**
  * Created by istimaldar on 23.03.2017.
