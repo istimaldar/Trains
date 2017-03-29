@@ -64,15 +64,16 @@ public class Main {
                     exit = 1;
             }
             clearConsole();
-            ListUtils.serializeObject(drivers, "drivers");
-            ListUtils.serializeObject(routes, "routes");
-            ListUtils.serializeObject(trains, "trains");
+            ListUtils.serializeObject(drivers, "data/drivers");
+            ListUtils.serializeObject(routes, "data/routes");
+            ListUtils.serializeObject(trains, "data/trains");
         }
     }
 
     private static Driver addDriver() {
         Driver driver = null;
-        try (Scanner reader = new Scanner(System.in)) {
+        Scanner reader = new Scanner(System.in);
+        try {
             System.out.println("Enter first name: ");
             String firstName = reader.next();
             System.out.println("Enter last name: ");
@@ -87,7 +88,8 @@ public class Main {
 
     private static String addRoute() {
         String name = "";
-        try (Scanner reader = new Scanner(System.in)) {
+        Scanner reader = new Scanner(System.in);
+        try {
             System.out.println("Enter route name: ");
             name = reader.next();
         }
@@ -100,7 +102,8 @@ public class Main {
     private static Train addTrain(ArrayList<Driver> drivers, ArrayList<String> routes) {
         Train train = null;
         int n = printMenu("Select train's type:", new String [] {"Freight Train", "Passenger Train"});
-        try (Scanner reader = new Scanner(System.in)) {
+        Scanner reader = new Scanner(System.in);
+        try {
             System.out.println("Enter train's name:");
             String name = reader.next();
             int driver = printMenu("Select the driver:", toStringArray(drivers));
@@ -191,7 +194,8 @@ public class Main {
 
     private static void addCargo(Carriage carriage) {
         int n = printMenu("Select the type of cargo:", new String [] {"Baggage", "Cargo", "Passenger"});
-        try (Scanner reader = new Scanner(System.in)) {
+        Scanner reader = new Scanner(System.in);
+        try {
             switch (n) {
                 case 1:
                     System.out.println("Enter the name of owner");

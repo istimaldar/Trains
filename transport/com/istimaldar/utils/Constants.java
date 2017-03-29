@@ -12,4 +12,5 @@ import java.util.Scanner;
 public class Constants {
     public static final Loadable EMPTY_SEAT = new Passenger("","");
     public static final Loadable EMPTY_BAGGAGE = new Baggage("",0);
+
 }

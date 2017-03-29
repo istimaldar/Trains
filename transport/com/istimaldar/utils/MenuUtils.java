@@ -1,5 +1,9 @@
 package com.istimaldar.utils;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,7 +13,8 @@ import java.util.Scanner;
 public class MenuUtils {
     public static int printMenu(String header, String [] variants) {
         int selected = 0;
-        try(Scanner reader = new Scanner(System.in)) {
+        Scanner reader = new Scanner(System.in);
+        try {
             System.out.println(header);
             for (int i = 0; i < variants.length; i++) {
                 System.out.println((i + 1) + ". " + variants[i]);
