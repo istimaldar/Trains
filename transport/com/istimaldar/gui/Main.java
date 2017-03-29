@@ -8,8 +8,8 @@ import com.istimaldar.transport.Train;
 import com.istimaldar.utils.ListUtils;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
-import static com.istimaldar.utils.Constants.READER;
 import static com.istimaldar.utils.MenuUtils.printMenu;
 import static com.istimaldar.utils.MenuUtils.toStringArray;
 
@@ -23,9 +23,9 @@ public class Main {
         ArrayList<String> routes = new ArrayList<>();
         ArrayList<Train> trains = new ArrayList<>();
         int exit = 0;
-        drivers = (ArrayList<Driver>) ListUtils.deserialzeObject("drivers");
-        routes = (ArrayList<String>) ListUtils.deserialzeObject("drivers");
-        trains = (ArrayList<Train>) ListUtils.deserialzeObject("drivers");
+        //drivers = (ArrayList<Driver>) ListUtils.deserialzeObject("drivers");
+        //routes = (ArrayList<String>) ListUtils.deserialzeObject("drivers");
+        //trains = (ArrayList<Train>) ListUtils.deserialzeObject("drivers");
         while (exit == 0) {
             int object = printMenu("Select an object:", new String [] {"Driver", "Route", "Train", "Exit"});
             if (object > 3) {
@@ -71,32 +71,53 @@ public class Main {
     }
 
     private static Driver addDriver() {
-        System.out.println("Enter first name: ");
-        String firstName = READER.next();
-        System.out.println("Enter last name: ");
-        String lastName = READER.next();
-        return new Driver(firstName, lastName);
+        Driver driver = null;
+        try (Scanner reader = new Scanner(System.in)) {
+            System.out.println("Enter first name: ");
+            String firstName = reader.next();
+            System.out.println("Enter last name: ");
+            String lastName = reader.next();
+            driver = new Driver(firstName, lastName);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return driver;
     }
 
     private static String addRoute() {
-        System.out.println("Enter route name: ");
-        return READER.next();
+        String name = "";
+        try (Scanner reader = new Scanner(System.in)) {
+            System.out.println("Enter route name: ");
+            name = reader.next();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return name;
     }
 
     private static Train addTrain(ArrayList<Driver> drivers, ArrayList<String> routes) {
+        Train train = null;
         int n = printMenu("Select train's type:", new String [] {"Freight Train", "Passenger Train"});
-        System.out.println("Enter train's name:");
-        String name = READER.next();
-        int driver = printMenu("Select the driver:", toStringArray(drivers));
-        int route = printMenu("Select the route:", toStringArray(routes));
-        switch (n) {
-            case 1:
-                return new FreightTrain(drivers.get(driver), routes.get(route), name);
-            case 2:
-                return new PassengerTrain(drivers.get(driver), routes.get(route), name);
-            default:
-                throw new IllegalArgumentException("No such train type");
+        try (Scanner reader = new Scanner(System.in)) {
+            System.out.println("Enter train's name:");
+            String name = reader.next();
+            int driver = printMenu("Select the driver:", toStringArray(drivers));
+            int route = printMenu("Select the route:", toStringArray(routes));
+            switch (n) {
+                case 1:
+                    train = new FreightTrain(drivers.get(driver), routes.get(route), name);
+                case 2:
+                    train = new PassengerTrain(drivers.get(driver), routes.get(route), name);
+                default:
+                    throw new IllegalArgumentException("No such train type");
+            }
         }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return train;
     }
 
     private static void selectTrain(ArrayList<Train> trains) {
@@ -170,27 +191,32 @@ public class Main {
 
     private static void addCargo(Carriage carriage) {
         int n = printMenu("Select the type of cargo:", new String [] {"Baggage", "Cargo", "Passenger"});
-        switch (n) {
-            case 1:
-                System.out.println("Enter the name of owner");
-                String owner = READER.next();
-                System.out.println("Enter the number of baggage");
-                carriage.load(new Baggage(owner, READER.nextFloat()));
-                break;
-            case 2:
-                System.out.println("Enter the type of cargo");
-                String type = READER.next();
-                System.out.println("Enter the number of cargo");
-                carriage.load(new Cargo(type, READER.nextFloat()));
-                break;
-            case 3:
-                System.out.println("Enter the first name of passenger");
-                String firstName = READER.next();
-                System.out.println("Enter the last name of passenger");
-                carriage.load(new Passenger(firstName, READER.next()));
-                break;
-            default:
-                throw new IllegalArgumentException("No such carriage type");
+        try (Scanner reader = new Scanner(System.in)) {
+            switch (n) {
+                case 1:
+                    System.out.println("Enter the name of owner");
+                    String owner = reader.next();
+                    System.out.println("Enter the number of baggage");
+                    carriage.load(new Baggage(owner, reader.nextFloat()));
+                    break;
+                case 2:
+                    System.out.println("Enter the type of cargo");
+                    String type = reader.next();
+                    System.out.println("Enter the number of cargo");
+                    carriage.load(new Cargo(type, reader.nextFloat()));
+                    break;
+                case 3:
+                    System.out.println("Enter the first name of passenger");
+                    String firstName = reader.next();
+                    System.out.println("Enter the last name of passenger");
+                    carriage.load(new Passenger(firstName, reader.next()));
+                    break;
+                default:
+                    throw new IllegalArgumentException("No such carriage type");
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
