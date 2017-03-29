@@ -27,34 +27,34 @@ public class Main {
         //trains = (ArrayList<Train>) ListUtils.deserialzeObject("drivers");
         while (exit == 0) {
             int object = printMenu("Select an object:", new String [] {"Driver", "Route", "Train", "Exit"});
-            if (object > 3) {
-                break;
+            int action = 0;
+            if (object < 3) {
+                action = printMenu("Select an action:", new String [] {"Add", "Show", "Select"});
             }
-            int action = printMenu("Select an action:", new String [] {"Add", "Show", "Select"});
             switch (object  * SECOND_MENU_ITEMS + action) {
                 case 0:
                     drivers.add(addDriver());
                     break;
                 case 1:
-                    //TODO: Add the ability to display drivers
+                    display("List of drivers:", drivers);
                     break;
                 case 2:
-                    //TODO: Add the ability to select drivers
+                    selectDriver(drivers);
                     break;
                 case 3:
                     routes.add(addRoute());
                     break;
                 case 4:
-                    //TODO: Add the ability to display routes
+                    display("List of routes:", routes);
                     break;
                 case 5:
-                    //TODO: Add the ability to display routes
+                    selectRoute(routes);
                     break;
                 case 6:
                     trains.add(addTrain(drivers, routes));
                     break;
                 case 7:
-                    //TODO: Add the ability to display routes
+                    display("List of trains:", trains);
                     break;
                 case 8:
                     selectTrain(trains);
@@ -67,6 +67,5 @@ public class Main {
             ListUtils.serializeObject(trains, "data/trains");
         }
     }
-
 
 }

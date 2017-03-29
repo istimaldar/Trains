@@ -58,6 +58,19 @@ public class MenuUtils {
         return driver;
     }
 
+    public static <T> void display(String header,List<T> elements) {
+        System.out.println(header);
+        int index = 1;
+        for(T element : elements) {
+            System.out.println((index++) + ". " + element);
+        }
+    }
+
+    public static void selectDriver(List<Driver> drivers) {
+        int driverIndex = printMenu("Select the driver:", toStringArray(drivers));
+        System.out.println("You selected: " + drivers.get(driverIndex));
+    }
+
     public static String addRoute() {
         String name = "";
         Scanner reader = new Scanner(System.in);
@@ -69,6 +82,11 @@ public class MenuUtils {
             e.printStackTrace();
         }
         return name;
+    }
+
+    public static void selectRoute(List<String> routes) {
+        int driverIndex = printMenu("Select the route:", (String [])routes.toArray());
+        System.out.println("You selected: " + routes.get(driverIndex));
     }
 
     public static Train addTrain(List<Driver> drivers, List<String> routes) {
