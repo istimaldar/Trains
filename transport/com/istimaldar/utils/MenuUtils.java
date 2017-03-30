@@ -11,19 +11,12 @@ import java.util.Scanner;
 
 public class MenuUtils {
     public static int printMenu(String header, String [] variants) {
-        int selected = 0;
         Scanner reader = new Scanner(System.in);
-        try {
-            System.out.println(header);
-            for (int i = 0; i < variants.length; i++) {
-                System.out.println((i + 1) + ". " + variants[i]);
-            }
-            selected = reader.nextInt() - 1;
+        System.out.println(header);
+        for (int i = 0; i < variants.length; i++) {
+            System.out.println((i + 1) + ". " + variants[i]);
         }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return selected;
+        return reader.nextInt() - 1;
     }
 
     private static <T> String[] toStringArray(List<T> list) {

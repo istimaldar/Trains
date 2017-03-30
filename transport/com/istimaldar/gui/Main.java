@@ -4,6 +4,7 @@ import com.istimaldar.transport.Driver;
 import com.istimaldar.transport.Train;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 import static com.istimaldar.utils.MenuUtils.*;
 import static com.istimaldar.utils.TrainUtils.countTotalNumberOfPassengersAndBaggage;
@@ -14,12 +15,16 @@ public class Main {
         ArrayList<Driver> drivers = new ArrayList<>();
         ArrayList<String> routes = new ArrayList<>();
         ArrayList<Train> trains = new ArrayList<>();
-        int exit = 0;
+        int exit = 0, action = 0, object;
         while (exit == 0) {
-            int object = printMenu("Select an object:", new String[]{"Driver", "Route", "Train", "Total number of passengers and baggage", "Save", "Load", "Exit"});
-            int action = 0;
-            if (object < 3) {
-                action = printMenu("Select an action:", new String [] {"Add", "Show", "Select"});
+            try {
+                object = printMenu("Select an object:", new String[]{"Driver", "Route", "Train", "Total number of passengers and baggage", "Save", "Load", "Exit"});
+                if (object < 3) {
+                    action = printMenu("Select an action:", new String[]{"Add", "Show", "Select"});
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Only numbers can be entered");
+                continue;
             }
             switch (object  * SECOND_MENU_ITEMS + action) {
                 case 0:
