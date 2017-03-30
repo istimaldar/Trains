@@ -13,4 +13,14 @@ public class FreightCarriage extends Carriage {
     boolean canBeLoaded(Loadable cargo) {
         return cargo instanceof Cargo;
     }
+
+    @Override
+    int getTotalAmountOfPassengers() {
+        return 0;
+    }
+
+    @Override
+    double getTotalAmountOfBaggage() {
+        return 0;
+    }
 }

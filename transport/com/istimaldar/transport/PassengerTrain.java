@@ -4,7 +4,7 @@ import com.istimaldar.cargo.Carriage;
 import com.istimaldar.cargo.FreightCarriage;
 
 /**
- * Created by istimaldar on 23.03.2017.
+ * Created by istimaldar
  */
 public class PassengerTrain extends Train {
     public PassengerTrain(Driver driver, String route, String name) {
@@ -30,5 +30,15 @@ public class PassengerTrain extends Train {
     @Override
     boolean canBeAdded(Carriage carriage) {
         return !(carriage instanceof FreightCarriage);
+    }
+
+    @Override
+    public int getTotalAmountOfPassengers() {
+        return 0;
+    }
+
+    @Override
+    public double getTotalAmountOfBaggage() {
+        return 0;
     }
 }

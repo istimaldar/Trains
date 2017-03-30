@@ -17,4 +17,8 @@ abstract public class Carriage {
     abstract public String toString();
 
     abstract boolean canBeLoaded(Loadable cargo);
+
+    abstract int getTotalAmountOfPassengers();
+
+    abstract double getTotalAmountOfBaggage();
 }

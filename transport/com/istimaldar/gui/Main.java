@@ -1,16 +1,13 @@
 package com.istimaldar.gui;
 
-import com.istimaldar.cargo.*;
 import com.istimaldar.transport.Driver;
-import com.istimaldar.transport.FreightTrain;
-import com.istimaldar.transport.PassengerTrain;
 import com.istimaldar.transport.Train;
 import com.istimaldar.utils.ListUtils;
 
 import java.util.ArrayList;
 
-import static com.istimaldar.utils.MenuUtils.addDriver;
 import static com.istimaldar.utils.MenuUtils.*;
+import static com.istimaldar.utils.TrainUtils.countTotalNumberOfPassengersAndBaggage;
 
 /**
  * Created by istimaldar on 23.03.2017.
@@ -26,7 +23,7 @@ public class Main {
         //routes = (ArrayList<String>) ListUtils.deserialzeObject("drivers");
         //trains = (ArrayList<Train>) ListUtils.deserialzeObject("drivers");
         while (exit == 0) {
-            int object = printMenu("Select an object:", new String [] {"Driver", "Route", "Train", "Exit"});
+            int object = printMenu("Select an object:", new String[]{"Driver", "Route", "Train", "Total number of passengers and luggage", "Exit"});
             int action = 0;
             if (object < 3) {
                 action = printMenu("Select an action:", new String [] {"Add", "Show", "Select"});
@@ -59,6 +56,8 @@ public class Main {
                 case 8:
                     selectTrain(trains);
                     break;
+                case 9:
+                    countTotalNumberOfPassengersAndBaggage(trains);
                 default:
                     exit = 1;
             }

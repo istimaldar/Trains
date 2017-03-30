@@ -31,4 +31,15 @@ public class FreightTrain extends Train {
     boolean canBeAdded(Carriage carriage) {
         return carriage instanceof FreightCarriage;
     }
+
+    @Override
+    public int getTotalAmountOfPassengers() {
+        return 0;
+    }
+
+    @Override
+    public double getTotalAmountOfBaggage() {
+        return 0;
+    }
+
 }

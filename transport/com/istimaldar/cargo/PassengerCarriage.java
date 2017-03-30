@@ -8,16 +8,20 @@ import static com.istimaldar.utils.Constants.EMPTY_SEAT;
 /**
  * Created by istimaldar on 23.03.2017.
  */
-abstract public class PassengerCarriage extends Carriage {
+abstract class PassengerCarriage extends Carriage {
     int levelOfComfort;
 
-    public PassengerCarriage(int seatsNum) {
+    PassengerCarriage(int seatsNum) {
         cargo = new ArrayList<>();
+        initializeSeats(seatsNum);
+
+    }
+
+    private void initializeSeats(int seatsNum) {
         for (int i = 0; i < seatsNum * 2; i++) {
-            if (i % 2 == 0)  {
+            if (i % 2 == 0) {
                 cargo.add(EMPTY_SEAT);
-            }
-            else {
+            } else {
                 cargo.add(EMPTY_BAGGAGE);
             }
         }
@@ -26,5 +30,31 @@ abstract public class PassengerCarriage extends Carriage {
     @Override
     boolean canBeLoaded(Loadable cargo) {
         return !(cargo instanceof Cargo);
+    }
+
+    @Override
+    int getTotalAmountOfPassengers() {
+        int numberOfPassengers = 0, position = 0;
+        for (Loadable c : cargo) {
+            if ((position++) % 2 == 0) {
+                if (!c.equals(EMPTY_SEAT)) {
+                    numberOfPassengers++;
+                }
+            }
+        }
+        return numberOfPassengers;
+    }
+
+    @Override
+    double getTotalAmountOfBaggage() {
+        int numberOfBaggage = 0, position = 0;
+        for (Loadable c : cargo) {
+            if ((position++) % 2 == 1) {
+                if (!c.equals(EMPTY_BAGGAGE)) {
+                    numberOfBaggage++;
+                }
+            }
+        }
+        return numberOfBaggage;
     }
 }

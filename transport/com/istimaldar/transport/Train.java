@@ -2,16 +2,14 @@ package com.istimaldar.transport;
 
 import com.istimaldar.cargo.Carriage;
 
-
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by istimaldar on 20.03.2017.
  */
 abstract public class Train extends Transport implements Serializable {
-    List<Carriage> carriages;
+    private List<Carriage> carriages;
     Train(Driver driver, String route, String name) {
         super(driver, route, name);
     }
@@ -37,4 +35,8 @@ abstract public class Train extends Transport implements Serializable {
     abstract public String toString();
 
     abstract boolean canBeAdded(Carriage carriage);
+
+    public abstract int getTotalAmountOfPassengers();
+
+    public abstract double getTotalAmountOfBaggage();
 }
