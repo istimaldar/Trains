@@ -1,34 +1,43 @@
 package com.istimaldar.utils;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.*;
-import java.util.ListIterator;
+import java.util.List;
 
-/**
- * Created by istimaldar on 20.03.2017.
- */
-public class ListUtils {
+class ListUtils {
 
-    public static void serializeObject(Object object, String name) {
+    static <T> void serializeList(List<T> list, String name) {
         try (ObjectOutputStream oos =
                       new ObjectOutputStream(new FileOutputStream(name))) {
-            oos.writeObject(object);
+            oos.writeObject(list);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    public static Object deserialzeObject(String name) {
+
+    static <T> List<T> deserialzeList(List<T> list, String name) {
+        List<?> temporaryList;
         try (ObjectInputStream ois
                      = new ObjectInputStream(new FileInputStream(name))) {
-            return ois.readObject();
+            temporaryList = (List<?>) ois.readObject();
+            list.clear();
+            for (Object element : temporaryList) {
+                if (element != null) {
+                    try {
+                        list.add((T) element);
+                    } catch (ClassCastException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return null;
+        return list;
     }
 
 }

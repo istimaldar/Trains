@@ -2,16 +2,12 @@ package com.istimaldar.gui;
 
 import com.istimaldar.transport.Driver;
 import com.istimaldar.transport.Train;
-import com.istimaldar.utils.ListUtils;
 
 import java.util.ArrayList;
 
 import static com.istimaldar.utils.MenuUtils.*;
 import static com.istimaldar.utils.TrainUtils.countTotalNumberOfPassengersAndBaggage;
 
-/**
- * Created by istimaldar on 23.03.2017.
- */
 public class Main {
     private static final int SECOND_MENU_ITEMS = 3;
     public static  void main(String [] args) {
@@ -19,11 +15,8 @@ public class Main {
         ArrayList<String> routes = new ArrayList<>();
         ArrayList<Train> trains = new ArrayList<>();
         int exit = 0;
-        //drivers = (ArrayList<Driver>) ListUtils.deserialzeObject("drivers");
-        //routes = (ArrayList<String>) ListUtils.deserialzeObject("drivers");
-        //trains = (ArrayList<Train>) ListUtils.deserialzeObject("drivers");
         while (exit == 0) {
-            int object = printMenu("Select an object:", new String[]{"Driver", "Route", "Train", "Total number of passengers and luggage", "Exit"});
+            int object = printMenu("Select an object:", new String[]{"Driver", "Route", "Train", "Total number of passengers and baggage", "Save", "Load", "Exit"});
             int action = 0;
             if (object < 3) {
                 action = printMenu("Select an action:", new String [] {"Add", "Show", "Select"});
@@ -58,12 +51,16 @@ public class Main {
                     break;
                 case 9:
                     countTotalNumberOfPassengersAndBaggage(trains);
+                    break;
+                case 12:
+                    saveAll(drivers, routes, trains);
+                    break;
+                case 15:
+                    loadAll(drivers, routes, trains);
+                    break;
                 default:
                     exit = 1;
             }
-            ListUtils.serializeObject(drivers, "data/drivers");
-            ListUtils.serializeObject(routes, "data/routes");
-            ListUtils.serializeObject(trains, "data/trains");
         }
     }
 

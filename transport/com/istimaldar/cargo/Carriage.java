@@ -2,9 +2,6 @@ package com.istimaldar.cargo;
 
 import java.util.ArrayList;
 
-/**
- * Created by istimaldar on 23.03.2017.
- */
 abstract public class Carriage {
     ArrayList<Loadable> cargo;
 
@@ -18,7 +15,7 @@ abstract public class Carriage {
 
     abstract boolean canBeLoaded(Loadable cargo);
 
-    abstract int getTotalAmountOfPassengers();
+    public abstract int getTotalAmountOfPassengers();
 
-    abstract double getTotalAmountOfBaggage();
+    public abstract double getTotalAmountOfBaggage();
 }

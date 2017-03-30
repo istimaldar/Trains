@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import static com.istimaldar.utils.Constants.EMPTY_BAGGAGE;
 import static com.istimaldar.utils.Constants.EMPTY_SEAT;
 
-/**
- * Created by istimaldar on 23.03.2017.
- */
 abstract class PassengerCarriage extends Carriage {
     int levelOfComfort;
 
@@ -33,7 +30,7 @@ abstract class PassengerCarriage extends Carriage {
     }
 
     @Override
-    int getTotalAmountOfPassengers() {
+    public int getTotalAmountOfPassengers() {
         int numberOfPassengers = 0, position = 0;
         for (Loadable c : cargo) {
             if ((position++) % 2 == 0) {
@@ -46,7 +43,7 @@ abstract class PassengerCarriage extends Carriage {
     }
 
     @Override
-    double getTotalAmountOfBaggage() {
+    public double getTotalAmountOfBaggage() {
         int numberOfBaggage = 0, position = 0;
         for (Loadable c : cargo) {
             if ((position++) % 2 == 1) {

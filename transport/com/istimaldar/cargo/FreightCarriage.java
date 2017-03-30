@@ -1,8 +1,5 @@
 package com.istimaldar.cargo;
 
-/**
- * Created by istimaldar on 23.03.2017.
- */
 public class FreightCarriage extends Carriage {
     @Override
     public String toString() {
@@ -15,12 +12,12 @@ public class FreightCarriage extends Carriage {
     }
 
     @Override
-    int getTotalAmountOfPassengers() {
+    public int getTotalAmountOfPassengers() {
         return 0;
     }
 
     @Override
-    double getTotalAmountOfBaggage() {
+    public double getTotalAmountOfBaggage() {
         return 0;
     }
 }

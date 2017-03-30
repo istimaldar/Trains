@@ -34,11 +34,19 @@ public class PassengerTrain extends Train {
 
     @Override
     public int getTotalAmountOfPassengers() {
-        return 0;
+        int amountOfPassengers = 0;
+        for (Carriage carriage : carriages) {
+            amountOfPassengers += carriage.getTotalAmountOfPassengers();
+        }
+        return amountOfPassengers;
     }
 
     @Override
     public double getTotalAmountOfBaggage() {
-        return 0;
+        int amountOfBaggage = 0;
+        for (Carriage carriage : carriages) {
+            amountOfBaggage += carriage.getTotalAmountOfBaggage();
+        }
+        return amountOfBaggage;
     }
 }

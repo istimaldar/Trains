@@ -6,17 +6,9 @@ import com.istimaldar.transport.FreightTrain;
 import com.istimaldar.transport.PassengerTrain;
 import com.istimaldar.transport.Train;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Created by istimaldar on 23.03.2017.
- */
 public class MenuUtils {
     public static int printMenu(String header, String [] variants) {
         int selected = 0;
@@ -172,9 +164,6 @@ public class MenuUtils {
                 //TODO: Full train info
                 break;
             case 3:
-
-                break;
-            case 4:
                 //TODO: Back
                 break;
             default:
@@ -212,6 +201,21 @@ public class MenuUtils {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void saveAll(List<Driver> drivers, List<String> routes, List<Train> trains) {
+        ListUtils.serializeList(drivers, "data/drivers");
+        ListUtils.serializeList(routes, "data/routes");
+        ListUtils.serializeList(trains, "data/trains");
+    }
+
+    public static void loadAll(List<Driver> drivers, List<String> routes, List<Train> trains) {
+        drivers.clear();
+        routes.clear();
+        trains.clear();
+        ListUtils.deserialzeList(drivers, "data/drivers");
+        ListUtils.deserialzeList(routes, "data/routes");
+        ListUtils.deserialzeList(trains, "data/trains");
     }
 
 }
