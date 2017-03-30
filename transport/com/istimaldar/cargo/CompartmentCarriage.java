@@ -1,8 +1,7 @@
 package com.istimaldar.cargo;
 
-/**
- * Created by istimaldar on 23.03.2017.
- */
+import java.util.Objects;
+
 public class CompartmentCarriage extends PassengerCarriage {
 
     public CompartmentCarriage() {
@@ -12,5 +11,15 @@ public class CompartmentCarriage extends PassengerCarriage {
     @Override
     public String toString() {
         return "Compartment Carriage";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof CompartmentCarriage && super.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cargo, levelOfComfort);
     }
 }

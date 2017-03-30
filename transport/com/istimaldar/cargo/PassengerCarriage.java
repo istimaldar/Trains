@@ -1,6 +1,7 @@
 package com.istimaldar.cargo;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.istimaldar.utils.Constants.EMPTY_BAGGAGE;
 import static com.istimaldar.utils.Constants.EMPTY_SEAT;
@@ -53,5 +54,16 @@ abstract class PassengerCarriage extends Carriage {
             }
         }
         return numberOfBaggage;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof PassengerCarriage && super.equals(o) &&
+                levelOfComfort == ((PassengerCarriage) o).levelOfComfort;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cargo, levelOfComfort);
     }
 }

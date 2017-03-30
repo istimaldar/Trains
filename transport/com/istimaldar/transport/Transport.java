@@ -1,8 +1,7 @@
 package com.istimaldar.transport;
 
-/**
- * Created by istimaldar on 20.03.2017.
- */
+import java.util.Objects;
+
 abstract public class Transport {
     private Driver driver;
     String routeName;
@@ -12,14 +11,33 @@ abstract public class Transport {
         routeName = route;
         this.name = name;
     }
-    public Driver getDriver() {
+
+    Driver getDriver() {
         return driver;
     }
+
     public void move() {
         System.out.println("I am the Transport and I moving on " + routeName + "route.");
         printDriver();
     }
-    protected void printDriver() {
+
+    void printDriver() {
         System.out.println("Driver is " + driver.toString());
+    }
+
+    @Override
+    public String toString() {
+        return "Transport, driver is " + getDriver() + ", route: " + routeName + ", name" + name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof Transport && driver.equals(((Transport) o).driver)
+                && routeName.equals(((Transport) o).routeName) && name.equals(((Transport) o).name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(driver, routeName, name);
     }
 }

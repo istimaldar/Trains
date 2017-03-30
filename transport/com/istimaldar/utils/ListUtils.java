@@ -17,7 +17,7 @@ class ListUtils {
         }
     }
 
-
+    @SuppressWarnings("unchecked")
     static <T> List<T> deserialzeList(List<T> list, String name) {
         List<?> temporaryList;
         try (ObjectInputStream ois

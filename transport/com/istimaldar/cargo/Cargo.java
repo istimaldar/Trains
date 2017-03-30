@@ -1,8 +1,7 @@
 package com.istimaldar.cargo;
 
-/**
- * Created by istimaldar on 23.03.2017.
- */
+import java.util.Objects;
+
 public class Cargo implements Loadable {
     private String type;
     private float amount;
@@ -26,7 +25,22 @@ public class Cargo implements Loadable {
     }
 
     @Override
+    public String toString() {
+        return "Cargo, type is " + type + ", amount is " + amount + ".";
+    }
+
+    @Override
     public boolean isEmpty() {
         return amount == 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof Cargo && type.equals(((Cargo) o).type) && amount == ((Cargo) o).amount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, amount);
     }
 }

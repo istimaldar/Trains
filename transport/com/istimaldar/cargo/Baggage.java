@@ -1,18 +1,13 @@
 package com.istimaldar.cargo;
 
+import java.util.Objects;
 
-/**
- * Created by istimaldar on 23.03.2017.
- */
 public class Baggage implements Loadable {
     private String owner;
     private float amount;
 
     public Baggage(String owner, float amount) {
         this.owner = owner;
-        if (amount < 0) {
-            throw new IllegalArgumentException("Cargo weight can not be less than 0");
-        }
         this.amount = amount;
     }
 
@@ -29,8 +24,27 @@ public class Baggage implements Loadable {
         return amount;
     }
 
+    public String getOwner() {
+        return owner;
+    }
+
     @Override
     public boolean isEmpty() {
         return amount == 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Baggage, owned by " + owner + ", amount is " + amount + ".";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof Baggage && owner.equals(((Baggage) o).owner) && amount == ((Baggage) o).amount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(owner, amount);
     }
 }

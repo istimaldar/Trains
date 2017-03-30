@@ -1,8 +1,7 @@
 package com.istimaldar.cargo;
 
-/**
- * Created by istimaldar on 23.03.2017.
- */
+import java.util.Objects;
+
 public class Passenger implements Loadable {
     private String firstName;
     private String lastName;
@@ -11,12 +10,7 @@ public class Passenger implements Loadable {
     public Passenger(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        if (firstName.equals("") && lastName.equals("")) {
-            empty = true;
-        }
-        else {
-            empty = false;
-        }
+        empty = firstName.equals("") && lastName.equals("");
     }
 
     @Override
@@ -35,5 +29,21 @@ public class Passenger implements Loadable {
     @Override
     public boolean isEmpty() {
         return empty;
+    }
+
+    @Override
+    public String toString() {
+        return "Passenger, name is " + firstName + " " + lastName + ".";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof Passenger && firstName.equals(((Passenger) o).firstName)
+                && firstName.equals(((Passenger) o).firstName) && empty == ((Passenger) o).empty;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, empty);
     }
 }

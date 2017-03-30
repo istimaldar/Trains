@@ -180,7 +180,11 @@ public class MenuUtils {
                     System.out.println("Enter the name of owner");
                     String owner = reader.next();
                     System.out.println("Enter the number of baggage");
-                    carriage.load(new Baggage(owner, reader.nextFloat()));
+                    float amount = reader.nextFloat();
+                    if (amount < 0) {
+                        throw new IllegalArgumentException("Cargo weight can not be less than 0");
+                    }
+                    carriage.load(new Baggage(owner, amount));
                     break;
                 case 2:
                     System.out.println("Enter the type of cargo");

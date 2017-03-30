@@ -1,5 +1,7 @@
 package com.istimaldar.cargo;
 
+import java.util.Objects;
+
 public class FreightCarriage extends Carriage {
     @Override
     public String toString() {
@@ -19,5 +21,15 @@ public class FreightCarriage extends Carriage {
     @Override
     public double getTotalAmountOfBaggage() {
         return 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof FreightCarriage && super.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cargo);
     }
 }

@@ -3,9 +3,8 @@ package com.istimaldar.transport;
 import com.istimaldar.cargo.Carriage;
 import com.istimaldar.cargo.FreightCarriage;
 
-/**
- * Created by istimaldar on 23.03.2017.
- */
+import java.util.Objects;
+
 public class FreightTrain extends Train {
     public FreightTrain(Driver driver, String route, String name) {
         super(driver, route, name);
@@ -40,6 +39,16 @@ public class FreightTrain extends Train {
     @Override
     public double getTotalAmountOfBaggage() {
         return 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof FreightTrain && super.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDriver(), routeName, name, carriages);
     }
 
 }
