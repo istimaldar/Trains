@@ -6,17 +6,26 @@ import com.istimaldar.transport.FreightTrain;
 import com.istimaldar.transport.PassengerTrain;
 import com.istimaldar.transport.Train;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class MenuUtils {
     public static int printMenu(String header, String [] variants) {
+        int selected = 0;
         Scanner reader = new Scanner(System.in);
-        System.out.println(header);
-        for (int i = 0; i < variants.length; i++) {
-            System.out.println((i + 1) + ". " + variants[i]);
+        try {
+            System.out.println(header);
+            for (int i = 0; i < variants.length; i++) {
+                System.out.println((i + 1) + ". " + variants[i]);
+            }
+            selected = reader.nextInt() - 1;
+        } catch (InputMismatchException e) {
+            throw e;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return reader.nextInt() - 1;
+        return selected;
     }
 
     private static <T> String[] toStringArray(List<T> list) {
